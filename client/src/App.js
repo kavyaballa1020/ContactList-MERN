@@ -3,7 +3,6 @@ import axios from 'axios';
 import ContactForm from './components/ContactForm';
 import ContactList from './components/ContactList';
 
-
 const App = () => {
   const [contacts, setContacts] = useState([]);
 

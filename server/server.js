@@ -6,7 +6,7 @@ const dotenv = require('dotenv');
 
 const contactRoutes = require('./routes/contactRoutes');
 
-dotenv.config();
+dotenv.config();  // Load environment variables
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -16,7 +16,7 @@ app.use(cors());
 
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('MongoDB connected...'))
-  .catch(err => console.log(err));
+  .catch(err => console.log('MongoDB connection error:', err));
 
 app.use('/contacts', contactRoutes);
 
