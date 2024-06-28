@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ContactList = ({ contacts, updateContact, deleteContact }) => {
+const ContactList = ({ contacts, deleteContact }) => {
   return (
     <div>
       <h2>Contact List</h2>
