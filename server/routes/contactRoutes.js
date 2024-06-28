@@ -4,24 +4,40 @@ const Contact = require('../models/contact');
 const router = express.Router();
 
 router.get('/', async (req, res) => {
-  const contacts = await Contact.find();
-  res.json(contacts);
+  try {
+    const contacts = await Contact.find();
+    res.json(contacts);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
 });
 
 router.post('/', async (req, res) => {
   const newContact = new Contact(req.body);
-  await newContact.save();
-  res.json(newContact);
+  try {
+    await newContact.save();
+    res.status(201).json(newContact);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
 });
 
 router.put('/:id', async (req, res) => {
-  const updatedContact = await Contact.findByIdAndUpdate(req.params.id, req.body, { new: true });
-  res.json(updatedContact);
+  try {
+    const updatedContact = await Contact.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    res.json(updatedContact);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
 });
 
 router.delete('/:id', async (req, res) => {
-  await Contact.findByIdAndDelete(req.params.id);
-  res.json({ message: 'Contact deleted' });
+  try {
+    await Contact.findByIdAndDelete(req.params.id);
+    res.json({ message: 'Contact deleted' });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
 });
 
 module.exports = router;
